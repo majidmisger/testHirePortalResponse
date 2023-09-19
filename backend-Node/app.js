@@ -16,18 +16,20 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
+if(process.env.dbUrl){
 
-mongoose.connect(process.env.dbUrl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
+  mongoose.connect(process.env.dbUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
   .then(() => {
     console.log('MongoDB Connected');
   })
   .catch((err) => {
     console.error('Error In MongoDB:', err);
   });
-
+  
+}
 
 
 app.get('/api/active-jobs', async (req, res) => {
